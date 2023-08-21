@@ -9,8 +9,6 @@ COPY docker-entrypoint.sh /entrypoint.sh
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NOWARNINGS=yes
 
-WORKDIR /root
-
 RUN set -ex \
     && apt-get update && apt-get install -y \
        usbmuxd libimobiledevice6 libimobiledevice-utils \
