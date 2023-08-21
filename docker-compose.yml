@@ -1,0 +1,28 @@
+version: '3'
+services:
+  config:
+    image: esme518/docker-altserver
+    volumes:
+      - ./data:/altserver
+      - ./lockdown:/var/lib/lockdown
+      - /var/run:/var/run
+      - /dev/bus/usb:/dev/bus/usb
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    network_mode: host
+    stdin_open: true
+    tty: true
+    privileged: true
+    profiles: ["config"]
+    command: usbmuxd -f
+
+  altserver:
+    image: esme518/docker-altserver
+    restart: unless-stopped
+    container_name: altserver
+    volumes:
+      - ./data:/altserver
+      - ./lockdown:/var/lib/lockdown
+      - /var/run:/var/run
+    network_mode: host
+    stdin_open: true
+    tty: true
