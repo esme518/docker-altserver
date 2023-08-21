@@ -12,7 +12,7 @@ ENV DEBCONF_NOWARNINGS=yes
 RUN set -ex \
     && apt-get update && apt-get install -y \
        usbmuxd libimobiledevice6 libimobiledevice-utils \
-       psmisc sudo tini wget curl libavahi-compat-libdnssd-dev \
+       psmisc sudo wget curl libavahi-compat-libdnssd-dev \
     && pip install --upgrade pip \
     && pip install requests \
     && apt-get autoremove -y \
@@ -21,5 +21,5 @@ RUN set -ex \
 
 WORKDIR /altserver
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["python3","main.py"]
